@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: org.lilacseeking.video.videoapp.VideoAppApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 37.116 sec - in org.lilacseeking.video.videoapp.VideoAppApplicationTests
