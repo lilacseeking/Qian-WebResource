@@ -1,5 +1,6 @@
 package org.lilacseeking.video.videoapp.Configuration;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -7,6 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @Date: 2018/11/9 22:26
  * @Description: 系统配置：短信平台、对象存储
  */
+@Data
 @ConfigurationProperties(prefix = "lilacseeking")
 public class ConstantProperties {
     /**
@@ -17,31 +19,16 @@ public class ConstantProperties {
      * Oss对象存储配置
      */
     public Oss oss;
+    /**
+     * 文件上传相关配置
+     */
+    public Upload upload;
+    /**
+     * 文件转码相关配置
+     */
+    public Encode encode;
 
-    public ConstantProperties() {
-    }
-
-    public ConstantProperties(Sms sms, Oss oss) {
-        this.sms = sms;
-        this.oss = oss;
-    }
-
-    public Sms getSms() {
-        return sms;
-    }
-
-    public void setSms(Sms sms) {
-        this.sms = sms;
-    }
-
-    public Oss getOss() {
-        return oss;
-    }
-
-    public void setOss(Oss oss) {
-        this.oss = oss;
-    }
-
+    @Data
     public static class Sms{
         /**
          * 短信平台Id
@@ -52,31 +39,9 @@ public class ConstantProperties {
          */
         public String accessKeySecret;
 
-        public String getAccessKeyId() {
-            return accessKeyId;
-        }
-
-        public void setAccessKeyId(String accessKeyId) {
-            this.accessKeyId = accessKeyId;
-        }
-
-        public String getAccessKeySecret() {
-            return accessKeySecret;
-        }
-
-        public void setAccessKeySecret(String accessKeySecret) {
-            this.accessKeySecret = accessKeySecret;
-        }
-
-        public Sms() {
-        }
-
-        public Sms(String accessKeyId, String accessKeySecret) {
-            this.accessKeyId = accessKeyId;
-            this.accessKeySecret = accessKeySecret;
-        }
     }
 
+    @Data
     public static class Oss{
         /**
          * 外部域名
@@ -95,47 +60,40 @@ public class ConstantProperties {
          */
         public String bucketName;
 
-        public Oss(){
+    }
 
-        }
-
-        public Oss(String endpoint, String accessKeyId, String accessKeySecret, String bucketName) {
-            this.endpoint = endpoint;
-            this.accessKeyId = accessKeyId;
-            this.accessKeySecret = accessKeySecret;
-            this.bucketName = bucketName;
-        }
-
-        public String getEndpoint() {
-            return endpoint;
-        }
-
-        public void setEndpoint(String endpoint) {
-            this.endpoint = endpoint;
-        }
-
-        public String getAccessKeyId() {
-            return accessKeyId;
-        }
-
-        public void setAccessKeyId(String accessKeyId) {
-            this.accessKeyId = accessKeyId;
-        }
-
-        public String getAccessKeySecret() {
-            return accessKeySecret;
-        }
-
-        public void setAccessKeySecret(String accessKeySecret) {
-            this.accessKeySecret = accessKeySecret;
-        }
-
-        public String getBucketName() {
-            return bucketName;
-        }
-
-        public void setBucketName(String bucketName) {
-            this.bucketName = bucketName;
-        }
+    @Data
+    public static class Upload{
+        /**
+         * 本地转码文件临时目录
+         */
+        public String encodeTargetRoute;
+        /**
+         * 本地转码源文件临时目录
+         */
+        public String sourceRoute;
+        /**
+         * Oss视频文件存放目录
+         */
+        public String videoRoute;
+        /**
+         * 缩略图路径
+         */
+        public String thumbnailRoute;
+    }
+    @Data
+    public static class Encode{
+        /**
+         * 超清
+         */
+        private String FHD;
+        /**
+         * 高清
+         */
+        private String HD;
+        /**
+         * 标清
+         */
+        private String SD;
     }
 }
