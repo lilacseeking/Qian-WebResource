@@ -16,7 +16,9 @@ public enum  ErrorCodeEumn {
     UNKNOWN_ERROR("2001","未知异常"),
 
     // 业务错误
-    MOBILE_CODE_SEND_FAILED("3001","手机验证码发送失败")
+    MOBILE_CODE_SEND_FAILED("3001","手机验证码发送失败"),
+    // 视频错误
+    VIDEO_TRANS_FAILED("4001","视频格式转换失败")
 
 
 

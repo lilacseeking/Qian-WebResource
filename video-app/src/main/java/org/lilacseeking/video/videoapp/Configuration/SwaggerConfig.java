@@ -23,7 +23,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.lilacseeking.Controller"))
+                .apis(RequestHandlerSelectors.basePackage("org.lilacseeking.video.videoapp.Controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

@@ -10,6 +10,7 @@ import org.lilacseeking.video.videoapp.Model.PO.VideoContentPO;
 import org.lilacseeking.video.videoapp.Model.PO.VideoCoursePO;
 import org.lilacseeking.video.videoapp.Service.video.VideoContentService;
 import org.lilacseeking.video.videoapp.Service.video.VideoCourseService;
+import org.lilacseeking.video.videoapp.Service.video.VideoService;
 import org.lilacseeking.video.videoapp.Utils.BeanCopyUtil;
 import org.lilacseeking.video.videoapp.Utils.ResponseUtil;
 import org.lilacseeking.video.videoapp.Utils.UploadUtils;
@@ -41,6 +42,8 @@ public class VideoController {
 
     @Autowired
     private VideoContentService videoContentService;
+    @Autowired
+    private VideoService videoService;
 
     /**
      * 创建课程
@@ -86,11 +89,27 @@ public class VideoController {
     @RequestMapping(value = "/uploadVideoClass",method = RequestMethod.POST)
     @ApiOperation(value = "上传视频")
     public void uploadVideoClass(MultipartFile classVideo,MultipartFile classThumbnail,HttpServletResponse response){
+
         try {
             UploadUtils.uploadFileStream(classVideo.getInputStream());
             UploadUtils.uploadFileStream(classThumbnail.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        responseUtil.putSuccess();
+        responseUtil.writeMessage(response);
+    }
+
+    /**
+     * 视频转码至MP4格式
+     * @param file
+     * @param response
+     */
+    @RequestMapping(value = "/encodeVideoToMP4ThreeCommonFormat",method = RequestMethod.POST)
+    @ApiOperation(value = "视频转码")
+    public void encodeVideoToMP4ThreeCommonFormat(MultipartFile file,HttpServletResponse response){
+        videoService.encodeVideoToMP4ThreeCommonFormat(file);
+        responseUtil.putSuccess();
+        responseUtil.writeMessage(response);
     }
 }
