@@ -8,7 +8,7 @@ import org.lilacseeking.video.videoapp.Eumns.ErrorCodeEumn;
 import org.lilacseeking.video.videoapp.Exception.BusinessException;
 import org.lilacseeking.video.videoapp.Model.DTO.LoginDTO;
 import org.lilacseeking.video.videoapp.Model.DTO.RegisterDTO;
-import org.lilacseeking.video.videoapp.Model.VO.UserBasicInfoDTO;
+import org.lilacseeking.video.videoapp.Model.DTO.UserBasicInfoDTO;
 import org.lilacseeking.video.videoapp.Service.UserService;
 import org.lilacseeking.video.videoapp.Utils.ResponseUtil;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
 package org.lilacseeking.video.videoapp.Service.Impl;
 
 import com.alibaba.fastjson.JSON;
-import org.lilacseeking.video.videoapp.Model.VO.UserBasicInfoDTO;
+import org.lilacseeking.video.videoapp.Model.DTO.UserBasicInfoDTO;
 import org.lilacseeking.video.videoapp.Service.RedisService;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-
-import static org.lilacseeking.video.videoapp.Service.RedisService.QIAN_MANAGE_SMS_CODE;
 
 /**
  * @Auther: lilacseeking
@@ -57,5 +55,14 @@ public class RedisServiceImpl implements RedisService {
 
     public String getUserToken(){
         return "";
+    }
+
+    /**
+     * 获取唯一字符编号
+     * @return
+     */
+    @Override
+    public String getUuidCode() {
+        return UUID.randomUUID().toString();
     }
 }

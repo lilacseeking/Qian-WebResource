@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
@@ -17,7 +18,8 @@ import javax.persistence.Table;
 @Accessors(chain = true)
 @Builder
 @Table(name = "video_upload")
-public class VideoUploadPO {
+@Entity
+public class VideoUploadPO extends BaseEntityPO{
 
     /**
      * 操作人Id
@@ -50,7 +52,7 @@ public class VideoUploadPO {
     /**
      * 视频大小
      */
-    private String videoSize;
+    private Long totalVideoSize;
 
     /**
      * 上传进度
@@ -76,4 +78,25 @@ public class VideoUploadPO {
      * 上传状态
      */
     private String uploadStatus;
+
+    public VideoUploadPO(){
+
+    }
+
+    public VideoUploadPO(String operateId, String operateName, String videoOriginName, String videoName, String videoOriginPath, String videoPath, String videoLength, Long totalVideoSize, String uploadRate, String thumbnailOriginName, String thumbnailName, String thumbnailOriginPath, String thumbnailPath, String uploadStatus) {
+        this.operateId = operateId;
+        this.operateName = operateName;
+        this.videoOriginName = videoOriginName;
+        this.videoName = videoName;
+        this.videoOriginPath = videoOriginPath;
+        this.videoPath = videoPath;
+        this.videoLength = videoLength;
+        this.totalVideoSize = totalVideoSize;
+        this.uploadRate = uploadRate;
+        this.thumbnailOriginName = thumbnailOriginName;
+        this.thumbnailName = thumbnailName;
+        this.thumbnailOriginPath = thumbnailOriginPath;
+        this.thumbnailPath = thumbnailPath;
+        this.uploadStatus = uploadStatus;
+    }
 }

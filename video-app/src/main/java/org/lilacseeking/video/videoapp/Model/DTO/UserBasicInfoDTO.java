@@ -1,4 +1,4 @@
-package org.lilacseeking.video.videoapp.Model.VO;
+package org.lilacseeking.video.videoapp.Model.DTO;
 
 import lombok.Builder;
 import lombok.Data;
