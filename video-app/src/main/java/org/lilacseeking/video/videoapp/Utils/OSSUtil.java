@@ -3,26 +3,161 @@ package org.lilacseeking.video.videoapp.Utils;
 import com.aliyun.oss.HttpMethod;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.*;
+import org.lilacseeking.video.videoapp.Common.AsyncMultipartUpload;
+import org.lilacseeking.video.videoapp.Configuration.ConstantProperties;
+import org.lilacseeking.video.videoapp.Eumns.ErrorCodeEumn;
+import org.lilacseeking.video.videoapp.Eumns.ProcessEnum;
+import org.lilacseeking.video.videoapp.Exception.BusinessException;
+import org.lilacseeking.video.videoapp.Listener.MultipartProgressListener;
+import org.lilacseeking.video.videoapp.Model.VO.VideoUploadProcessVO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.Future;
 
+@Component
 public class OSSUtil {
+    @Autowired
+    private static OSSUtil ossUtil;
+
+    @Autowired
+    private ThreadPoolTaskExecutor executor;
+    @Autowired
+    private ConstantProperties constantProperties;
+
+    private static OSSClient ossClient;
+
+    private static String bucketName;
+    // 文件上传路径
+    private static String videoRoute;
+    // 缩略图上传路径
+    private static String thumbnailRoute;
+
     private static final long DEFAULT_EXPIRATION_TIME = 1000L * 60 * 60 * 24 * 365 * 100;
     //****************************************创建客户端和一些普通常用方法****************************************
+    @PostConstruct
+    public void init(){
 
+        // Spring 依赖注入
+        ossUtil = this;
+        ossUtil.executor = this.executor;
+        ossUtil.constantProperties = this.constantProperties;
+
+        // 初始化OSS连接客户端
+        getOSSClient();
+    }
     /**
-     * 创建oss客户端
+     * 获取oss客户端
      *
-     * @param endpoint
-     * @param accessKeyId
-     * @param accessKeySecret
      * @return
      */
-    public static OSSClient createOSSClient(String endpoint, String accessKeyId, String accessKeySecret) {
-        return new OSSClient(endpoint, accessKeyId, accessKeySecret);
+    public static OSSClient getOSSClient() {
+
+        String endpoint = ossUtil.constantProperties.getOss().getEndpoint();
+        String accessKeyId = ossUtil.constantProperties.getOss().getAccessKeyId();
+        String accessKeySecret = ossUtil.constantProperties.getOss().getAccessKeySecret();
+        OSSUtil.bucketName = ossUtil.constantProperties.getOss().getBucketName();
+        OSSUtil.videoRoute = ossUtil.constantProperties.getUpload().getVideoRoute();
+        OSSUtil.thumbnailRoute = ossUtil.constantProperties.getUpload().getThumbnailRoute();
+        if (null == ossClient){
+            return new OSSClient(endpoint, accessKeyId, accessKeySecret);
+        }else{
+            return ossClient;
+        }
+
     }
+
+    /**
+     * 分片上传
+     */
+    public static VideoUploadProcessVO multipartUpload(VideoUploadProcessVO videoUploadProcessVO){
+        // 1. 初始化⼀个分⽚上传事件
+        File sampleFile = new File(videoUploadProcessVO.getVideoOriginPath());
+        InitiateMultipartUploadRequest request = new InitiateMultipartUploadRequest(bucketName, videoUploadProcessVO.getVideoName());
+        InitiateMultipartUploadResult result = ossClient.initiateMultipartUpload(request);
+        String uploadId = result.getUploadId();
+
+        // 2. 上传分⽚(partETags是PartETag的集合 PartETag由分⽚的ETag和分⽚号组成)
+        List<Future<UploadPartResult>> futures = new ArrayList<Future<UploadPartResult>>();
+        List partETags = new ArrayList<>();
+
+        // 2.1 计算文件分片数，遍历上传，接收返回结果
+
+        final long partSize = 1 * 1024 * 1024L;   // 1MB
+        long fileLength = sampleFile.length();
+        int partCount = (int) (fileLength / partSize);
+        if (fileLength % partSize != 0) {
+            partCount++;
+        }
+        try {
+            // 2.2 遍历分⽚上传。
+            for (int i = 0; i < partCount; i++) {
+                long startPos = i * partSize;
+                long curPartSize = (i + 1 == partCount) ? (fileLength - startPos) : partSize;
+                InputStream inStream = null;
+                inStream = new FileInputStream(sampleFile);
+                inStream.skip(startPos);
+
+                // tips 跳过已经上传的分⽚。
+                UploadPartRequest uploadPartRequest = new UploadPartRequest();
+                uploadPartRequest.setBucketName(bucketName);
+                uploadPartRequest.setKey(videoUploadProcessVO.getVideoName());
+                uploadPartRequest.setUploadId(uploadId);
+                uploadPartRequest.setInputStream(inStream);
+                // 设置分⽚⼤小。除了最后⼀个分⽚没有⼤小限制，其他的分⽚最小为100KB。
+                uploadPartRequest.setPartSize(curPartSize);
+                // 设置分⽚号。每⼀个上传的分⽚都有⼀个分⽚号，取值范围是1~10000，如果超出这个范围，OSS将返回InvalidArgument的错误码。
+                uploadPartRequest.setPartNumber(i + 1);
+                uploadPartRequest.setProgressListener(new MultipartProgressListener(uploadPartRequest.getUploadId(), videoUploadProcessVO.getVideoName()));
+                // 每个分⽚不需要按顺序上传，甚⾄可以在不同客⼾端上传，OSS会按照分⽚号排序组成完整的⽂件。
+                Future<UploadPartResult> feature = ossUtil.executor.submit(new AsyncMultipartUpload(ossClient, uploadPartRequest));
+                futures.add(feature);
+            }
+            for (Future<UploadPartResult> future : futures) {
+                // 每次上传分⽚之后，OSS的返回结果会包含⼀个PartETag。PartETag将被保存到partETags中。
+                partETags.add(future.get().getPartETag());
+
+            }
+        } catch (Exception e) {
+                throw new BusinessException(ErrorCodeEumn.VIDEO_UPLOAD_FAIL.getName());
+        } finally {
+        }
+
+        // 排序。partETags必须按分⽚号升序排列。
+        Collections.sort(partETags, new Comparator<PartETag>() {
+            public int compare(PartETag p1, PartETag p2) {
+                return p1.getPartNumber() - p2.getPartNumber();
+            }
+        });
+
+        // 在执⾏该操作时，需要提供所有有效的partETags。OSS收到提交的partETags后，会逐⼀验证每个分⽚的有效性。当所有的数据分⽚验证通过后，OSS将把这些分⽚组合成⼀个完整的⽂件。
+        CompleteMultipartUploadRequest completeMultipartUploadRequest =
+                new CompleteMultipartUploadRequest(bucketName, videoUploadProcessVO.getVideoName(), uploadId, partETags);
+        ossClient.completeMultipartUpload(completeMultipartUploadRequest);
+        videoUploadProcessVO.setUploadStatus(ProcessEnum.SUCCESS.name());
+        return videoUploadProcessVO;
+    }
+
+    /**
+     * 创建文件下载url
+     *
+     * @param key        所存内容的键名
+     * @return
+     */
+    public static URL createFileAccessUrl(String key) {
+        GeneratePresignedUrlRequest req = new GeneratePresignedUrlRequest(bucketName, key, HttpMethod.GET);
+        req.setExpiration(new Date(new Date().getTime() + DEFAULT_EXPIRATION_TIME));
+        return ossClient.generatePresignedUrl(req);
+    }
+
+
+
+
 
     /**
      * 列举Objects
@@ -45,7 +180,6 @@ public class OSSUtil {
         ObjectListing objectListing = ossClient.listObjects(listObjectsRequest);
         return objectListing.getObjectSummaries();
     }
-
     /**
      * 删除objects
      *
@@ -59,6 +193,7 @@ public class OSSUtil {
         DeleteObjectsResult deleteObjectsResult = ossClient.deleteObjects(deleteObjectsRequest);
         return deleteObjectsResult.getDeletedObjects();
     }
+
     //****************************************文件上传下载****************************************
 
     /**
@@ -465,25 +600,6 @@ public class OSSUtil {
     }
 
     //*********************************************下载*********************************************
-
-    /**
-     * 创建文件下载url
-     *
-     * @param ossClient  OSSClient实例
-     * @param bucketName 存储空间名
-     * @param key        所存内容的键名
-     * @param expiration 超时时间（默认100年）
-     * @return
-     */
-    public static URL createObjUrl(OSSClient ossClient, String bucketName, String key, Long expiration) {
-        GeneratePresignedUrlRequest req = new GeneratePresignedUrlRequest(bucketName, key, HttpMethod.GET);
-        if (expiration != null && expiration > 0) {
-            req.setExpiration(new Date(new Date().getTime() + expiration));
-        } else {
-            req.setExpiration(new Date(new Date().getTime() + DEFAULT_EXPIRATION_TIME));
-        }
-        return ossClient.generatePresignedUrl(req);
-    }
 
     /**
      * 获取文件下载流(可指定下载范围)

@@ -18,8 +18,10 @@ public enum  ErrorCodeEumn {
     // 业务错误
     MOBILE_CODE_SEND_FAILED("3001","手机验证码发送失败"),
     // 视频错误
-    VIDEO_TRANS_FAILED("4001","视频格式转换失败")
-
+    VIDEO_TRANS_FAILED("4001","视频格式转换失败"),
+    // 视频上传
+    VIDEO_UPLOAD_FAIL("5001","视频上传失败"),
+    VIDEO_UPLOAD_RATE_FAIL("5002","视频上传进度获取失败")
 
 
 

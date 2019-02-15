@@ -1,6 +1,6 @@
 package org.lilacseeking.video.videoapp.Service;
 
-import org.lilacseeking.video.videoapp.Model.VO.UserBasicInfoDTO;
+import org.lilacseeking.video.videoapp.Model.DTO.UserBasicInfoDTO;
 
 /**
  * @Auther: lilacseeking
@@ -27,4 +27,10 @@ public interface RedisService {
     UserBasicInfoDTO saveUserToken(UserBasicInfoDTO userBasicInfoDTO);
 
     String getUserToken();
+
+    /**
+     * 获取唯一字符编号
+     * @return
+     */
+     String getUuidCode();
 }

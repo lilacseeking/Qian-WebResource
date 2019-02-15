@@ -31,7 +31,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("芊芊学堂API接口")
                 .description("Qian-WebResource")
-                .termsOfServiceUrl("唯一官方地址：http://www.lilacseeking.cn")
+                .termsOfServiceUrl("唯一官方地址：http://www.lilacseeking.com")
                 .contact("lilacseeking")
                 .version("1.0")
                 .build();

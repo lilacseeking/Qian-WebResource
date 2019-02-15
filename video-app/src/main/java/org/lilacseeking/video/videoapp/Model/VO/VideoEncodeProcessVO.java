@@ -1,29 +1,36 @@
-package org.lilacseeking.video.videoapp.Model.PO;
+package org.lilacseeking.video.videoapp.Model.VO;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.junit.jupiter.api.Test;
 import org.lilacseeking.video.videoapp.Eumns.ProcessEnum;
 
-import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * @Author： lvming
- * @Date： Created in 16:09 2019/1/31
- * @Description： 视频转码相关信息
+ * @Date： Created in 15:24 2019/2/15
+ * @Description：
  * @Modified By：
  * @Version:
  */
 @Data
 @Accessors(chain = true)
-@Builder
-@Table(name = "video_encode")
-@Entity
-public class VideoEncodePO extends BaseEntityPO{
+public class VideoEncodeProcessVO {
+    /**
+     * 创建时间
+     */
+    public Date gmtCreate = new Date();
+    /**
+     * 完成时间
+     */
+    public Date gmtFinish;
+    /**
+     * 用时 单位ms
+     */
+    public Long consumingTime;
     /**
      * 操作人Id
      */
@@ -69,21 +76,4 @@ public class VideoEncodePO extends BaseEntityPO{
      * 转码进度
      */
     private Integer encodeRate;
-
-    public VideoEncodePO(Long operateId, String operateName, String videoOriginName, String videoName, String videoOriginPath, String videoPath, Long videoLength, Long videoSize,String resolution, ProcessEnum encodeStatus, Integer encodeRate) {
-        this.operateId = operateId;
-        this.operateName = operateName;
-        this.videoOriginName = videoOriginName;
-        this.videoName = videoName;
-        this.videoOriginPath = videoOriginPath;
-        this.videoPath = videoPath;
-        this.videoLength = videoLength;
-        this.resolution = resolution;
-        this.videoSize = videoSize;
-        this.encodeStatus = encodeStatus;
-        this.encodeRate = encodeRate;
-    }
-
-    public VideoEncodePO() {
-    }
 }

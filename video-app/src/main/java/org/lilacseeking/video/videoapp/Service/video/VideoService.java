@@ -1,7 +1,8 @@
 package org.lilacseeking.video.videoapp.Service.video;
 
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import java.io.File;
+import java.util.List;
 
 /**
  * @Author： lvming
@@ -17,4 +18,10 @@ public interface VideoService {
      * @param file
      */
     void encodeVideoToMP4ThreeCommonFormat(MultipartFile file);
+
+    /**
+     * 上传文件(列表上传)
+     * @param fileList
+     */
+    void uploadFileList(List<File> fileList);
 }

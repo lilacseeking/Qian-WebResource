@@ -14,6 +14,8 @@ import org.lilacseeking.video.videoapp.Service.video.VideoService;
 import org.lilacseeking.video.videoapp.Utils.BeanCopyUtil;
 import org.lilacseeking.video.videoapp.Utils.ResponseUtil;
 import org.lilacseeking.video.videoapp.Utils.UploadUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +46,7 @@ public class VideoController {
     private VideoContentService videoContentService;
     @Autowired
     private VideoService videoService;
+    private static Logger LOGGER = LoggerFactory.getLogger(VideoController.class);
 
     /**
      * 创建课程
@@ -112,4 +115,22 @@ public class VideoController {
         responseUtil.putSuccess();
         responseUtil.writeMessage(response);
     }
+
+    /**
+     * 查看文件上传、转码进度
+     */
+    @RequestMapping(value = "/getFileTaskProcess",method = RequestMethod.POST)
+    @ApiOperation(value = "查看文件上传、转码进度")
+    public void getFileTaskProcess(){
+
+        while (true){
+            LOGGER.info("视频转码进度,视频名称,");
+            LOGGER.info("视频上传进度");
+        }
+
+    }
+
+
+
+
 }

@@ -13,6 +13,6 @@ public class UploadUtils {
      * @param fileInputStream
      */
     public static void uploadFileStream(InputStream fileInputStream){
-        new OSSUtilTest().testUploadStream(fileInputStream);
+//        new OSSUtilTest().testUploadStream(fileInputStream);
     }
 }

@@ -12,7 +12,7 @@ import org.lilacseeking.video.videoapp.Exception.BusinessException;
 import org.lilacseeking.video.videoapp.Model.DTO.LoginDTO;
 import org.lilacseeking.video.videoapp.Model.DTO.RegisterDTO;
 import org.lilacseeking.video.videoapp.Model.PO.UserPO;
-import org.lilacseeking.video.videoapp.Model.VO.UserBasicInfoDTO;
+import org.lilacseeking.video.videoapp.Model.DTO.UserBasicInfoDTO;
 import org.lilacseeking.video.videoapp.Service.RedisService;
 import org.lilacseeking.video.videoapp.Service.UserService;
 import org.lilacseeking.video.videoapp.Utils.*;

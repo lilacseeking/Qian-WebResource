@@ -3,7 +3,7 @@ package org.lilacseeking.video.videoapp.Service;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import org.lilacseeking.video.videoapp.Model.DTO.LoginDTO;
 import org.lilacseeking.video.videoapp.Model.DTO.RegisterDTO;
-import org.lilacseeking.video.videoapp.Model.VO.UserBasicInfoDTO;
+import org.lilacseeking.video.videoapp.Model.DTO.UserBasicInfoDTO;
 import org.lilacseeking.video.videoapp.Utils.Page;
 import org.springframework.stereotype.Service;
 import java.text.ParseException;

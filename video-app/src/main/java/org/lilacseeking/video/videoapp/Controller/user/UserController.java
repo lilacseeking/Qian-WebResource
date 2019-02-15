@@ -3,7 +3,7 @@ package org.lilacseeking.video.videoapp.Controller.user;
 import io.swagger.annotations.ApiOperation;
 import org.lilacseeking.video.videoapp.Api.Result;
 import org.lilacseeking.video.videoapp.Model.DTO.LoginDTO;
-import org.lilacseeking.video.videoapp.Model.VO.UserBasicInfoDTO;
+import org.lilacseeking.video.videoapp.Model.DTO.UserBasicInfoDTO;
 import org.lilacseeking.video.videoapp.Service.UserService;
 import org.lilacseeking.video.videoapp.Utils.Page;
 import org.lilacseeking.video.videoapp.Utils.ResponseUtil;
