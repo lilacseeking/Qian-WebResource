@@ -1,8 +1,10 @@
 package org.lilacseeking.video.videoapp.Common;
 
 import org.lilacseeking.video.videoapp.Dao.video.VideoEncodeRepository;
+import org.lilacseeking.video.videoapp.Model.Factory.VideoEncodeSetFactory;
 import org.lilacseeking.video.videoapp.Model.PO.VideoEncodePO;
 import org.lilacseeking.video.videoapp.Listener.EncodingListener;
+import org.lilacseeking.video.videoapp.Model.VO.VideoEncodeProcessVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,15 +43,16 @@ public class ASycShowProcess implements Runnable{
         while (!Thread.interrupted() && null !=Thread.currentThread()){
             List process = pListener.getProgress();
             Integer encodeRate = process.size() == 0 ? 0 : (Integer) process.get(process.size() - 1) / 10;
-            LOGGER.info("视频转码进度显示：进度：{}%,info:{},message:{},process:{}",encodeRate,
-                    pListener.getInfo(),pListener.getMessages(),pListener.getProgress());
+
+////            LOGGER.info("视频转码进度显示：进度：{}%,info:{},message:{},process:{}",encodeRate,
+////                    pListener.getInfo(),pListener.getMessages(),pListener.getProgress());
             if (100 == encodeRate){
-                VideoEncodePO videoencodePO = VideoEncodePO.builder().operateId(null).
-                        operateName(null).videoOriginName(null).videoName(null).
-                        videoOriginPath(null).videoPath(null).videoLength(null).
-                        videoSize(null).encodeStatus(null).encodeRate(encodeRate).build();
+//                VideoEncodePO videoencodePO = VideoEncodePO.builder().operateId(null).
+//                        operateName(null).videoOriginName(null).videoName(null).
+//                        videoOriginPath(null).videoPath(null).videoLength(null).
+//                        videoSize(null).encodeStatus(null).encodeRate(encodeRate).build();
                 endListenStatus = true;
-                videoEncodeRepository.saveOrUpdate(videoencodePO);
+//                videoEncodeRepository.saveOrUpdate(videoencodePO);
                 LOGGER.info("转码成功：进度：{}%",encodeRate);
                 break;
             }

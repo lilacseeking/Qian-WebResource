@@ -52,7 +52,7 @@ public class VideoUploadPO extends BaseEntityPO{
     /**
      * 视频大小
      */
-    private Long totalVideoSize;
+    private Long videoSize;
 
     /**
      * 上传进度
@@ -83,7 +83,7 @@ public class VideoUploadPO extends BaseEntityPO{
 
     }
 
-    public VideoUploadPO(String operateId, String operateName, String videoOriginName, String videoName, String videoOriginPath, String videoPath, String videoLength, Long totalVideoSize, String uploadRate, String thumbnailOriginName, String thumbnailName, String thumbnailOriginPath, String thumbnailPath, String uploadStatus) {
+    public VideoUploadPO(String operateId, String operateName, String videoOriginName, String videoName, String videoOriginPath, String videoPath, String videoLength, Long videoSize, String uploadRate, String thumbnailOriginName, String thumbnailName, String thumbnailOriginPath, String thumbnailPath, String uploadStatus) {
         this.operateId = operateId;
         this.operateName = operateName;
         this.videoOriginName = videoOriginName;
@@ -91,7 +91,7 @@ public class VideoUploadPO extends BaseEntityPO{
         this.videoOriginPath = videoOriginPath;
         this.videoPath = videoPath;
         this.videoLength = videoLength;
-        this.totalVideoSize = totalVideoSize;
+        this.videoSize = videoSize;
         this.uploadRate = uploadRate;
         this.thumbnailOriginName = thumbnailOriginName;
         this.thumbnailName = thumbnailName;
