@@ -58,6 +58,50 @@ let routes = [
       // {path:'/test',component: Test, name:'测试路由'},
     ]
   },
+  {
+    path: '/',
+    component: Home,
+    name: '视频管理',
+    iconCls: 'el-icon-menu',
+    children: [
+      // {path:'/',redirect:'userMgm', hidden: true},
+      {path:'/addTeacher',component: AddTeacherMgm, name:'新增教师'},
+      // {path:'/test',component: Test, name:'测试路由'},
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: '订单管理',
+    iconCls: 'el-icon-menu',
+    children: [
+      // {path:'/',redirect:'userMgm', hidden: true},
+      {path:'/addTeacher',component: AddTeacherMgm, name:'新增教师'},
+      // {path:'/test',component: Test, name:'测试路由'},
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: '日志管理',
+    iconCls: 'el-icon-menu',
+    children: [
+      // {path:'/',redirect:'userMgm', hidden: true},
+      {path:'/addTeacher',component: AddTeacherMgm, name:'新增教师'},
+      // {path:'/test',component: Test, name:'测试路由'},
+    ]
+  },
+  {
+    path: '/',
+    component: Home,
+    name: '系统管理',
+    iconCls: 'el-icon-menu',
+    children: [
+      // {path:'/',redirect:'userMgm', hidden: true},
+      {path:'/addTeacher',component: AddTeacherMgm, name:'新增教师'},
+      // {path:'/test',component: Test, name:'测试路由'},
+    ]
+  },
 ];
 
 Vue.use(Router);

@@ -11,7 +11,7 @@ import java.io.Serializable;
  */
 
 @Data
-public class VideoCourseDTO implements Serializable {
+public class CourseDTO implements Serializable {
 
     /**
      * 课程名称

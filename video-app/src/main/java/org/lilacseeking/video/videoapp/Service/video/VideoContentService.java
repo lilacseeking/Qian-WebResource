@@ -1,6 +1,10 @@
 package org.lilacseeking.video.videoapp.Service.video;
 
+import org.lilacseeking.video.videoapp.Model.DTO.ContentDTO;
+import org.lilacseeking.video.videoapp.Model.DTO.CourseDTO;
 import org.lilacseeking.video.videoapp.Model.PO.VideoContentPO;
+
+import java.util.List;
 
 /**
  * @Auther: lilacseeking
@@ -15,4 +19,11 @@ public interface VideoContentService {
      * @return 章节信息
      */
     VideoContentPO addVideoContent(VideoContentPO videoContentPO);
+
+    /**
+     * 新增课程章节信息列表
+     * @param contentDTOList
+     * @return
+     */
+    List<VideoContentPO> addVideoContentList(List<ContentDTO> contentDTOList);
 }
