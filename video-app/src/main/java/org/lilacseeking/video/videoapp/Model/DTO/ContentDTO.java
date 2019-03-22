@@ -8,7 +8,7 @@ import lombok.Data;
  * @Description:
  */
 @Data
-public class VideoContentDTO {
+public class ContentDTO {
 
     /**
      * 课程Id

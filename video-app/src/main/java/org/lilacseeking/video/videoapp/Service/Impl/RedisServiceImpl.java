@@ -1,12 +1,16 @@
 package org.lilacseeking.video.videoapp.Service.Impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.lilacseeking.video.videoapp.Model.DTO.CourseForHomeDTO;
 import org.lilacseeking.video.videoapp.Model.DTO.UserBasicInfoDTO;
 import org.lilacseeking.video.videoapp.Service.RedisService;
+import org.redisson.api.RBucket;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -64,5 +68,15 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public String getUuidCode() {
         return UUID.randomUUID().toString();
+    }
+     /**
+     * 获取首页课程列表
+     * @return
+     */
+    @Override
+    public List<CourseForHomeDTO> getCourseListForHome() {
+        RBucket<String> bucket = redissonClient.getBucket(QIAN_HOME_COURSE_LIST);
+        String result = bucket.get();
+        return JSONObject.parseArray(result,CourseForHomeDTO.class);
     }
 }

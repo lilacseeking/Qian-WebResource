@@ -1,7 +1,9 @@
 package org.lilacseeking.video.videoapp.Service.video;
 
 
+import com.alibaba.fastjson.JSONObject;
 import org.lilacseeking.video.videoapp.Model.PO.VideoCoursePO;
+import org.lilacseeking.video.videoapp.Utils.Page;
 
 /**
  * @Auther: lilacseeking
@@ -16,4 +18,11 @@ public interface VideoCourseService {
      * @return
      */
     VideoCoursePO addVideoClass(VideoCoursePO videoCoursePO);
+
+    /**
+     * 获取课程列表
+     * @param filter
+     * @return
+     */
+    Page getCourseList(JSONObject filter);
 }

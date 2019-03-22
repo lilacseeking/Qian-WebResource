@@ -1,12 +1,11 @@
 package org.lilacseeking.video.videoapp.Model.PO;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 /**
  * @Auther: lilacseeking
@@ -15,11 +14,9 @@ import javax.persistence.Table;
  * 此表为视频课程表，显示课程的详细信息
  */
 @Data
-@Builder
 @Accessors(chain = true)
 @Entity
 @Table(name = "video_class")
-//@Inheritance(strategy = InheritanceType.JOINED)
 public class VideoCoursePO extends BaseEntityPO {
     /**
      * 课程名称
@@ -42,7 +39,7 @@ public class VideoCoursePO extends BaseEntityPO {
     /**
      *  课程标签
      */
-    @Column(name = "tage")
+    @Column(name = "tags")
     public String tags;
 
     /**
@@ -50,10 +47,20 @@ public class VideoCoursePO extends BaseEntityPO {
      */
     @Column(name = "is_free", nullable = false)
     public Boolean isFree = true;
+    /**
+     * 课程价格
+     */
+    @Column(columnDefinition = "decimal(15,2) default 0.00")
+    public BigDecimal price;
 
     /**
      * 该课程的折扣
      */
     @Column(name = "discount",nullable = false, precision = 2, scale = 1)
     public Double discount = 0.0;
+    /**
+     * 课程的缩略图
+     */
+    @Column(name = "thumbnail", nullable = false)
+    public String thumbnail;
 }

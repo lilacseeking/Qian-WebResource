@@ -1,6 +1,9 @@
 package org.lilacseeking.video.videoapp.Service;
 
+import org.lilacseeking.video.videoapp.Model.DTO.CourseForHomeDTO;
 import org.lilacseeking.video.videoapp.Model.DTO.UserBasicInfoDTO;
+
+import java.util.List;
 
 /**
  * @Auther: lilacseeking
@@ -13,6 +16,8 @@ public interface RedisService {
     String QIAN_MANAGE_SMS_CODE = "Qian-Manage-Sms-Code";
     // 用户信息
     String QIAN_MANAGE_USER_INFO = "Qian-Manage-User-Info";
+    // 课程列表
+    String QIAN_HOME_COURSE_LIST = "Qian-Home-Course-List";
 
     // 保存验证码
     Boolean saveSmsCode(String mobile, String code);
@@ -33,4 +38,7 @@ public interface RedisService {
      * @return
      */
      String getUuidCode();
+
+    //获取首页课程列表
+    List<CourseForHomeDTO> getCourseListForHome();
 }

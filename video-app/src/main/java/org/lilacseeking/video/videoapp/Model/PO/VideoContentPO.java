@@ -1,10 +1,8 @@
 package org.lilacseeking.video.videoapp.Model.PO;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.lilacseeking.video.videoapp.Eumns.YesOrNoEnum;
-
 import javax.persistence.*;
 
 /**
@@ -15,7 +13,6 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-@Builder
 @Accessors(chain = true)
 @Table(name = "video_content")
 public class VideoContentPO extends BaseEntityPO {

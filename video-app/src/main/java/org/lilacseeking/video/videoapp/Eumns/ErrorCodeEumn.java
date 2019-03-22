@@ -12,6 +12,7 @@ public enum  ErrorCodeEumn {
     MOBILE_CODE_ERROR("1002","验证码错误"),
     PASSWORD_NOT_CORRECT("1003","密码输入错误"),
     NEW_PASSWORD_NOT_NULL("1004","新密码不可为空"),
+    PAGE_INFO_FORMAT_WRONG("1005","分页信息输入错误"),
     // 系统错误
     UNKNOWN_ERROR("2001","未知异常"),
 
@@ -21,12 +22,10 @@ public enum  ErrorCodeEumn {
     VIDEO_TRANS_FAILED("4001","视频格式转换失败"),
     // 视频上传
     VIDEO_UPLOAD_FAIL("5001","视频上传失败"),
-    VIDEO_UPLOAD_RATE_FAIL("5002","视频上传进度获取失败")
+    VIDEO_UPLOAD_RATE_FAIL("5002","视频上传进度获取失败"),
 
-
-
-
-    ;
+    COURSE_NOT_NULL("6001","课程不允许为空"),
+    CONTENT_LIST_NOT_NULL("6002","章节列表不允许为空");
 
 
     private String code;
