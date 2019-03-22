@@ -6,10 +6,7 @@ import lombok.experimental.Accessors;
 import org.junit.jupiter.api.Test;
 import org.lilacseeking.video.videoapp.Eumns.ProcessEnum;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @Author： lvming
@@ -20,17 +17,19 @@ import javax.persistence.Table;
  */
 @Data
 @Accessors(chain = true)
-@Builder
+//@Builder
 @Table(name = "video_encode")
 @Entity
 public class VideoEncodePO extends BaseEntityPO{
     /**
      * 操作人Id
      */
+    @Column(name="operate_id", nullable=false, length = 64)
     private Long operateId;
     /**
      * 操作人姓名
      */
+    @Column(name="operate_name", nullable=false, length = 64)
     private String operateName;
     /**
      * 视频原名称

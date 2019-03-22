@@ -69,51 +69,51 @@
 //        }
 //    }
 //
-//    public void VideoTranscode(){
-//        // 1 定义源文件和目标文件
-//        File source = new File("C:\\Users\\Administrator\\Desktop\\公司的视频.mp4");
-//        File target = new File("C:\\Users\\Administrator\\Desktop\\公司的视频.3gp");
-//        if (target.exists())
-//        {
-//            target.delete();
-//        }
-////        VideoSize totalVideoSize = new VideoSize(3840, 2160);
-//        // 2 定义视频属性
-//        VideoAttributes video = new VideoAttributes();
-////        video.setCodec("mpeg4");
-////        video.setBitRate(160000);
-////        video.setFrameRate(15);
-////        video.setSize(totalVideoSize);
-//        // 2 定义音频属性
-//        AudioAttributes audio = new AudioAttributes();
-//        // 编码器名称，为空则复制文件
-////        audio.setCodec("libfaac");
-//        // 编码过程的比特率值，为空选择默认值
-////        audio.setBitRate(128000);
-//        // 编码过程的通道值，1=mono，2=stereo
-////        audio.setChannels(2);
-//        // 编码过程的采样值，为空则选择默认值
-////        audio.setSamplingRate(44100);
-//        // 3 转码属性
-//        EncodingAttributes encodeAttr = new EncodingAttributes();
-//        //已编码的目标文件格式
-//        encodeAttr.setFormat("3gp");
-//        // 视频流编码属性
-//        encodeAttr.setVideoAttributes(video);
-//        // 音频流编码属性
-////        encodeAttr.setAudioAttributes(audio);
-//        // 4 设置进度监听
-//        EncodingListener listener = new EncodingListener();
-//        executor.execute(new ASycShowProcess(listener));
-//        // 4 转码
-//        //Encode
-//        Encoder encoder = new Encoder();
-//        try {
-//            encoder.encode(new MultimediaObject(source), target, encodeAttr,listener);
-//        } catch (EncoderException e) {
-//            LOGGER.error("视频转码至mp4失败，源文件路径：{}，目标文件路径：{}，错误信息：{}，音频属性：{}，转码属性：{}",source.getPath(),target.getPath(),e.getMessage(),JSON.toJSONString(video),JSON.toJSONString(encodeAttr));
-//        }
-//    }
+////    public void VideoTranscode(){
+////        // 1 定义源文件和目标文件
+////        File source = new File("C:\\Users\\Administrator\\Desktop\\公司的视频.mp4");
+////        File target = new File("C:\\Users\\Administrator\\Desktop\\公司的视频.3gp");
+////        if (target.exists())
+////        {
+////            target.delete();
+////        }
+//////        VideoSize totalVideoSize = new VideoSize(3840, 2160);
+////        // 2 定义视频属性
+////        VideoAttributes video = new VideoAttributes();
+//////        video.setCodec("mpeg4");
+//////        video.setBitRate(160000);
+//////        video.setFrameRate(15);
+//////        video.setSize(totalVideoSize);
+////        // 2 定义音频属性
+////        AudioAttributes audio = new AudioAttributes();
+////        // 编码器名称，为空则复制文件
+//////        audio.setCodec("libfaac");
+////        // 编码过程的比特率值，为空选择默认值
+//////        audio.setBitRate(128000);
+////        // 编码过程的通道值，1=mono，2=stereo
+//////        audio.setChannels(2);
+////        // 编码过程的采样值，为空则选择默认值
+//////        audio.setSamplingRate(44100);
+////        // 3 转码属性
+////        EncodingAttributes encodeAttr = new EncodingAttributes();
+////        //已编码的目标文件格式
+////        encodeAttr.setFormat("3gp");
+////        // 视频流编码属性
+////        encodeAttr.setVideoAttributes(video);
+////        // 音频流编码属性
+//////        encodeAttr.setAudioAttributes(audio);
+////        // 4 设置进度监听
+////        EncodingListener listener = new EncodingListener();
+////        executor.execute(new ASycShowProcess(listener));
+////        // 4 转码
+////        //Encode
+////        Encoder encoder = new Encoder();
+////        try {
+////            encoder.encode(new MultimediaObject(source), target, encodeAttr,listener);
+////        } catch (EncoderException e) {
+////            LOGGER.error("视频转码至mp4失败，源文件路径：{}，目标文件路径：{}，错误信息：{}，音频属性：{}，转码属性：{}",source.getPath(),target.getPath(),e.getMessage(),JSON.toJSONString(video),JSON.toJSONString(encodeAttr));
+////        }
+////    }
 //
 //    /**
 //     * 获取视频长度
@@ -273,79 +273,79 @@
 //     * 测试转码（进度显示）
 //     * @throws java.lang.Exception
 //     */
-//    public void testEncodeVideo2() throws Exception {
-//        System.out.println("encode");
-//        File source = new File("C:\\Users\\Administrator\\Desktop\\公司的视频.mp4");
-//        File target = new File("C:\\Users\\Administrator\\Desktop\\公司的视频.avi");
-//        if (target.exists())
-//        {
-//            target.delete();
-//        }
-//        AudioAttributes audio = new AudioAttributes();
-////        audio.setCodec("libfaac");
-////        audio.setBitRate(128000);
-////        audio.setSamplingRate(44100);
-////        audio.setChannels(2);
-//        VideoAttributes video = new VideoAttributes();
-////        video.setCodec("mpeg4");
-////        video.setBitRate(160000);
-////        video.setFrameRate(15);
-//        video.setSize(new VideoSize(3840, 2160));
-//        EncodingAttributes attrs = new EncodingAttributes();
-//        attrs.setFormat("avi");
-//        attrs.setAudioAttributes(audio);
-//        attrs.setVideoAttributes(video);
-//        Encoder encoder = new Encoder();
-//        EncodingListener listener = new EncodingListener();
-//        executor.execute(new ASycShowProcess(listener));
-//        encoder.encode(new MultimediaObject(source), target, attrs, listener);
-//        assertNotNull(listener.getInfo());
-//        assertTrue( target.exists(), "Output file missing");
-//    }
+////    public void testEncodeVideo2() throws Exception {
+////        System.out.println("encode");
+////        File source = new File("C:\\Users\\Administrator\\Desktop\\公司的视频.mp4");
+////        File target = new File("C:\\Users\\Administrator\\Desktop\\公司的视频.avi");
+////        if (target.exists())
+////        {
+////            target.delete();
+////        }
+////        AudioAttributes audio = new AudioAttributes();
+//////        audio.setCodec("libfaac");
+//////        audio.setBitRate(128000);
+//////        audio.setSamplingRate(44100);
+//////        audio.setChannels(2);
+////        VideoAttributes video = new VideoAttributes();
+//////        video.setCodec("mpeg4");
+//////        video.setBitRate(160000);
+//////        video.setFrameRate(15);
+////        video.setSize(new VideoSize(3840, 2160));
+////        EncodingAttributes attrs = new EncodingAttributes();
+////        attrs.setFormat("avi");
+////        attrs.setAudioAttributes(audio);
+////        attrs.setVideoAttributes(video);
+////        Encoder encoder = new Encoder();
+////        EncodingListener listener = new EncodingListener();
+////        executor.execute(new ASycShowProcess(listener));
+////        encoder.encode(new MultimediaObject(source), target, attrs, listener);
+////        assertNotNull(listener.getInfo());
+////        assertTrue( target.exists(), "Output file missing");
+////    }
 //
 //    /**
 //     * Test of encode method, of class Encoder.
 //     * @throws java.lang.Exception
 //     */
-//    public void testEncodeVideo3() throws Exception {
-//        System.out.println("encode");
-//        File source = new File("C:\\Users\\Administrator\\Desktop\\Redis-String案例.AVI");
-//        File target = new File("C:\\Users\\Administrator\\Desktop\\Redis-String案例.3pg");
-//        if (target.exists())
-//        {
-//            target.delete();
-//        }
-//        AudioAttributes audio = new AudioAttributes();
-//        audio.setCodec("libfaac");
-//        audio.setBitRate(128000);
-//        audio.setSamplingRate(44100);
-//        audio.setChannels(2);
-//        VideoAttributes video = new VideoAttributes();
-//        video.setCodec("mpeg4");
-//        video.setBitRate(160000);
-//        video.setFrameRate(15);
-//        video.setSize(new VideoSize(176, 144));
-//        EncodingAttributes attrs = new EncodingAttributes();
-//        attrs.setFormat("3gp");
-//        attrs.setAudioAttributes(audio);
-//        attrs.setVideoAttributes(video);
-//        Encoder encoder = new Encoder();
-//        EncodingListener listener = new EncodingListener();
-//        // TODO 多线程显示进度信息
-//        executor.execute(new ASycShowProcess(listener));
-//        String errorMessage= "Exit code of ffmpeg encoding run is 1";
-//        boolean exceptionThrown= false;
-//        try
-//        {
-//            encoder.encode(new MultimediaObject(source), target, attrs, listener);
-//        }
-//        catch (EncoderException ex)
-//        {
-//            assertEquals(ex.getMessage(), errorMessage, "Not expected error message");
-//            exceptionThrown= true;
-//        }
-//        assertTrue( exceptionThrown, "No exception occured");
-//    }
+////    public void testEncodeVideo3() throws Exception {
+////        System.out.println("encode");
+////        File source = new File("C:\\Users\\Administrator\\Desktop\\Redis-String案例.AVI");
+////        File target = new File("C:\\Users\\Administrator\\Desktop\\Redis-String案例.3pg");
+////        if (target.exists())
+////        {
+////            target.delete();
+////        }
+////        AudioAttributes audio = new AudioAttributes();
+////        audio.setCodec("libfaac");
+////        audio.setBitRate(128000);
+////        audio.setSamplingRate(44100);
+////        audio.setChannels(2);
+////        VideoAttributes video = new VideoAttributes();
+////        video.setCodec("mpeg4");
+////        video.setBitRate(160000);
+////        video.setFrameRate(15);
+////        video.setSize(new VideoSize(176, 144));
+////        EncodingAttributes attrs = new EncodingAttributes();
+////        attrs.setFormat("3gp");
+////        attrs.setAudioAttributes(audio);
+////        attrs.setVideoAttributes(video);
+////        Encoder encoder = new Encoder();
+////        EncodingListener listener = new EncodingListener();
+////        // TODO 多线程显示进度信息
+////        executor.execute(new ASycShowProcess(listener));
+////        String errorMessage= "Exit code of ffmpeg encoding run is 1";
+////        boolean exceptionThrown= false;
+////        try
+////        {
+////            encoder.encode(new MultimediaObject(source), target, attrs, listener);
+////        }
+////        catch (EncoderException ex)
+////        {
+////            assertEquals(ex.getMessage(), errorMessage, "Not expected error message");
+////            exceptionThrown= true;
+////        }
+////        assertTrue( exceptionThrown, "No exception occured");
+////    }
 //
 //    /**
 //     * Test of encode method, of class Encoder.

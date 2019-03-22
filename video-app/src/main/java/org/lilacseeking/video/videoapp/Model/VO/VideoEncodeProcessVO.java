@@ -7,6 +7,7 @@ import org.lilacseeking.video.videoapp.Eumns.ProcessEnum;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 @Data
 @Accessors(chain = true)
-public class VideoEncodeProcessVO {
+public class VideoEncodeProcessVO implements Serializable {
     /**
      * 创建时间
      */

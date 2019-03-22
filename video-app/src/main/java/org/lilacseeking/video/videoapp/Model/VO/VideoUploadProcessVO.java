@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Date;
@@ -18,7 +19,7 @@ import java.util.Date;
 @Data
 @Accessors(chain = true)
 @Builder
-public class VideoUploadProcessVO {
+public class VideoUploadProcessVO implements Serializable {
     /**
      * 创建时间
      */

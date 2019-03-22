@@ -1,13 +1,18 @@
 package org.lilacseeking.video.videoapp.Controller.video;
 
+import com.alibaba.fastjson.JSON;
 import com.querydsl.jpa.JPAQueryBase;
 import com.querydsl.jpa.impl.JPAQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.lilacseeking.video.videoapp.Model.DTO.VideoContentDTO;
 import org.lilacseeking.video.videoapp.Model.DTO.VideoCourseDTO;
+import org.lilacseeking.video.videoapp.Model.Factory.FileUploadSetFactory;
+import org.lilacseeking.video.videoapp.Model.Factory.VideoEncodeSetFactory;
 import org.lilacseeking.video.videoapp.Model.PO.VideoContentPO;
 import org.lilacseeking.video.videoapp.Model.PO.VideoCoursePO;
+import org.lilacseeking.video.videoapp.Model.VO.VideoEncodeProcessVO;
+import org.lilacseeking.video.videoapp.Model.VO.VideoUploadProcessVO;
 import org.lilacseeking.video.videoapp.Service.video.VideoContentService;
 import org.lilacseeking.video.videoapp.Service.video.VideoCourseService;
 import org.lilacseeking.video.videoapp.Service.video.VideoService;
@@ -17,6 +22,7 @@ import org.lilacseeking.video.videoapp.Utils.UploadUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.FileEncodingApplicationListener;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Auther: lilacseeking
@@ -121,11 +127,28 @@ public class VideoController {
      */
     @RequestMapping(value = "/getFileTaskProcess",method = RequestMethod.POST)
     @ApiOperation(value = "查看文件上传、转码进度")
-    public void getFileTaskProcess(){
+    public void getFileTaskProcess(String str,HttpServletResponse response){
 
         while (true){
-            LOGGER.info("视频转码进度,视频名称,");
-            LOGGER.info("视频上传进度");
+            // 获取所有转码文件进度，打印日志
+            Set<String> encodeSets = VideoEncodeSetFactory.getEncodeMap().keySet();
+            Iterator<String> encodeIterator=encodeSets.iterator();
+            while (encodeIterator.hasNext()){
+                VideoEncodeProcessVO videoEncodeProcessVO = (VideoEncodeProcessVO) VideoEncodeSetFactory.getEncodeObject(encodeIterator.next());
+                LOGGER.info("视频转码进度,视频名称：{}，转码进度：{}%，转码任务:{}",encodeIterator.next(),videoEncodeProcessVO==null?"暂无正在转码的视频":videoEncodeProcessVO.getEncodeRate(), JSON.toJSON(VideoEncodeSetFactory.getEncodeMap()));
+            }
+            // 获取所有转码文件进度，打印日志
+            Set<String> uploadSets = FileUploadSetFactory.getUploadMap().keySet();
+            Iterator<String> uploadIterators=uploadSets.iterator();
+            while (uploadIterators.hasNext()){
+                VideoUploadProcessVO videoUploadProcessVO = (VideoUploadProcessVO) FileUploadSetFactory.getUploadObject(uploadIterators.next());
+                LOGGER.info("视频上传进度,视频名称：{}，上传进度：{}%，上传任务:{}",uploadIterators.next(),videoUploadProcessVO==null?"暂无正在上传的视频":videoUploadProcessVO.getUploadRate(), JSON.toJSON(VideoEncodeSetFactory.getEncodeMap()));
+            }
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
     }
