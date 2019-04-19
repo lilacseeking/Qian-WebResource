@@ -1,0 +1,107 @@
+@mixin prefixer($property, $value, $prefixes: webkit moz) {
+  #{$property}: $value;
+
+  @each $prefix in $prefixes {
+    @if $prefix == webkit {
+      -webkit-#{$property}:#{$value};
+    }
+    @else if $prefix == moz {
+      -moz-#{$property}:#{$value};
+    }
+    @else if $prefix == o {
+      -o-#{$property}:#{$value};
+    }
+    @else if $prefix == ms {
+      -ms-#{$property}:#{$value};
+    }
+  }
+}
+// flex布局
+@mixin flex(){
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+@mixin flex-direction() {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+@mixin flex-align-center($val) {
+  -webkit-box-align: $val;
+  -webkit-align-items: $val;
+  -ms-flex-align: $val;
+  align-items: $val;
+}
+@mixin justify-center() {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+@mixin space-between($val) {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: $val;
+  -ms-flex-pack: justify;
+  justify-content: $val;
+}
+@mixin flex-direction-v() {
+  -webkit-box-orient:vertical;
+  -webkit-flex-direction:column;
+  -ms-flex-direction:column;
+  flex-direction:column;
+}
+@mixin flex-num($num) {
+  -webkit-box-flex: $num;
+  -webkit-flex: $num;
+  -ms-flex: $num;
+  flex: $num;
+}
+
+
+// 背景图片
+@mixin bg-image($url){
+  background-image: url($url);
+  background-size: cover;
+}
+
+// 不换行
+@mixin no-wrap() {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// 扩展点击区域
+@mixin  extend-click(){
+  position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+  }
+}
+
+// 行高
+@mixin line-height($height){
+  height: $height;
+  line-height: $height;
+}
+// 宽高相等
+@mixin widthHeigh($val){
+  width: $val;
+  height: $val;
+}
+//超过第几行隐藏
+@mixin over-Num-Line($num){
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $num;
+}
