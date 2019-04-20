@@ -59,7 +59,7 @@
 //        // 音频流编码属性
 //        encodeAttr.setAudioAttributes(audio);
 //        // 4 转码
-//        //Encode
+//        //encode
 //        Encoder encoder = new Encoder();
 //        try {
 //            encoder.encode(new MultimediaObject(source), target, encodeAttr);
@@ -105,7 +105,7 @@
 ////        EncodingListener listener = new EncodingListener();
 ////        executor.execute(new ASycShowProcess(listener));
 ////        // 4 转码
-////        //Encode
+////        //encode
 ////        Encoder encoder = new Encoder();
 ////        try {
 ////            encoder.encode(new MultimediaObject(source), target, encodeAttr,listener);

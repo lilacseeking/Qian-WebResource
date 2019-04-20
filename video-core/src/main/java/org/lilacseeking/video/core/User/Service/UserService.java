@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.util.List;
 
-@Service
 public interface UserService {
 
     /**

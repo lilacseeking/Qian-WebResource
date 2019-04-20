@@ -3,9 +3,9 @@ package org.lilacseeking.video.app.Controller.ppt;
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.lilacseeking.video.app.Model.DTO.PPTDTO;
-import org.lilacseeking.video.app.Service.ppt.PPTService;
-import org.lilacseeking.video.app.Utils.ResponseUtil;
+import org.lilacseeking.video.app.Service.ResponseUtil;
+import org.lilacseeking.video.core.PPT.Service.PPTService;
+import org.lilacseeking.video.infrastructure.Model.DTO.PPTDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 

@@ -1,5 +1,6 @@
 package org.lilacseeking.video.core.Upload.Service;
 
+import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 /**
@@ -14,6 +15,6 @@ public interface FileService {
      * @param files
      * @return
      */
-//    List moreFileUpload(MultipartFile[] files);
+    List moreFileUpload(MultipartFile[] files);
 
 }

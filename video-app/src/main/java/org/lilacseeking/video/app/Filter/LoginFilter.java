@@ -1,15 +1,14 @@
 package org.lilacseeking.video.app.Filter;
 
-import org.apache.commons.lang.StringUtils;
-import org.lilacseeking.video.app.Eumns.ErrorCodeEumn;
-import org.lilacseeking.video.app.Model.DTO.UserBasicInfoDTO;
-import org.lilacseeking.video.app.Service.RedisService;
-import org.lilacseeking.video.app.Utils.ResponseUtil;
-import org.lilacseeking.video.app.Utils.UserUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.lilacseeking.video.app.Service.Redis.RedisService;
+import org.lilacseeking.video.app.Service.ResponseUtil;
+import org.lilacseeking.video.infrastructure.enums.ErrorCodeEumn;
+import org.lilacseeking.video.infrastructure.Model.DTO.UserBasicInfoDTO;
+import org.lilacseeking.video.infrastructure.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

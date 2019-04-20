@@ -3,15 +3,13 @@ package org.lilacseeking.video.app.Controller.video;
 import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.lilacseeking.video.app.Eumns.ErrorCodeEumn;
-import org.lilacseeking.video.app.Exception.BusinessException;
-import org.lilacseeking.video.app.Model.Factory.FileUploadSetFactory;
-import org.lilacseeking.video.app.Model.Factory.VideoEncodeSetFactory;
-import org.lilacseeking.video.app.Model.VO.VideoEncodeProcessVO;
-import org.lilacseeking.video.app.Model.VO.VideoUploadProcessVO;
-import org.lilacseeking.video.app.Service.course.VideoService;
-import org.lilacseeking.video.app.Utils.ResponseUtil;
-import org.lilacseeking.video.app.Utils.UploadUtils;
+import org.lilacseeking.video.infrastructure.Model.Factory.FileUploadSetFactory;
+import org.lilacseeking.video.infrastructure.Model.Factory.VideoEncodeSetFactory;
+import org.lilacseeking.video.infrastructure.Model.VO.VideoEncodeProcessVO;
+import org.lilacseeking.video.infrastructure.Model.VO.VideoUploadProcessVO;
+import org.lilacseeking.video.infrastructure.enums.ErrorCodeEumn;
+import org.lilacseeking.video.infrastructure.Exception.BusinessException;
+import org.lilacseeking.video.app.Service.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
@@ -38,9 +35,9 @@ public class VideoController {
     @Autowired
     private ResponseUtil responseUtil;
 
-
-    @Autowired
-    private VideoService videoService;
+// TODO 工程结构修改
+//    @Autowired
+//    private VideoService videoService;
 
     private static Logger LOGGER = LoggerFactory.getLogger(VideoController.class);
 
@@ -54,9 +51,10 @@ public class VideoController {
     @ApiOperation(value = "上传图片")
     public void uploadImage(MultipartFile thumbnail, HttpServletResponse response) {
         try {
-            UploadUtils.uploadImage(thumbnail.getInputStream());
+            // TODO 工程结构修改
+//            UploadUtils.uploadImage(thumbnail.getInputStream());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new BusinessException(ErrorCodeEumn.COURSE_THUMBNAIL_UPLOAD_FAIL.getName());
         }
         responseUtil.putSuccess();
@@ -76,9 +74,10 @@ public class VideoController {
     public void uploadVideoClass(MultipartFile classVideo, MultipartFile classThumbnail, HttpServletResponse response) {
 
         try {
-            UploadUtils.uploadFileStream(classVideo.getInputStream());
-            UploadUtils.uploadFileStream(classThumbnail.getInputStream());
-        } catch (IOException e) {
+            // TODO 工程结构修改
+//            UploadUtils.uploadFileStream(classVideo.getInputStream());
+//            UploadUtils.uploadFileStream(classThumbnail.getInputStream());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         responseUtil.putSuccess();
@@ -94,7 +93,8 @@ public class VideoController {
     @RequestMapping(value = "/encodeVideoToMP4ThreeCommonFormat", method = RequestMethod.POST)
     @ApiOperation(value = "视频转码")
     public void encodeVideoToMP4ThreeCommonFormat(MultipartFile file, HttpServletResponse response) {
-        videoService.encodeVideoToMP4ThreeCommonFormat(file);
+        // TODO 工程结构修改
+//        videoService.encodeVideoToMP4ThreeCommonFormat(file);
         responseUtil.putSuccess();
         responseUtil.writeMessage(response);
     }

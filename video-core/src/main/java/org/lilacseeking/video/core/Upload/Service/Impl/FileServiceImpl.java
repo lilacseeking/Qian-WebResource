@@ -4,6 +4,7 @@ import org.lilacseeking.video.core.Upload.Service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 //import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,18 +31,20 @@ public class FileServiceImpl implements FileService {
      * @return
      */
     // TODO 工程结构修改
-//    @Override
-//    public List moreFileUpload(MultipartFile[] files) {
-//        List fileUrlList = new ArrayList();
-//        for (MultipartFile file : files) {
-//            try {
+    @Override
+    public List moreFileUpload(MultipartFile[] files) {
+        List fileUrlList = new ArrayList();
+        for (MultipartFile file : files) {
+            try {
+                // TODO 工程结构修改
 //                String key = redisService.getUuidCode() + "." + OSSUtil.getExtensionName(file.getOriginalFilename());
 //                executor.submit(new AsyncPutObjectUpload(file.getInputStream(), key));
 //                fileUrlList.add("http://www.lilacseeking.com/" + key );
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//        return fileUrlList;
-//    }
+                fileUrlList.add("http://www.lilacseeking.com/" );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return fileUrlList;
+    }
 }

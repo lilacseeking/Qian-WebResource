@@ -3,16 +3,15 @@ package org.lilacseeking.video.app.Controller.user;
 import com.alibaba.fastjson.JSON;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import io.swagger.annotations.ApiOperation;
-import org.lilacseeking.video.app.Api.Result;
 import org.lilacseeking.video.app.Controller.CommonController;
-import org.lilacseeking.video.app.Eumns.ErrorCodeEumn;
-import org.lilacseeking.video.app.Exception.BusinessException;
-import org.lilacseeking.video.app.Model.DTO.LoginDTO;
-import org.lilacseeking.video.app.Model.DTO.RegisterDTO;
-import org.lilacseeking.video.app.Model.DTO.UserBasicInfoDTO;
-import org.lilacseeking.video.app.Service.user.UserService;
-import org.lilacseeking.video.app.Utils.Page;
-import org.lilacseeking.video.app.Utils.ResponseUtil;
+import org.lilacseeking.video.app.Service.ResponseUtil;
+import org.lilacseeking.video.core.User.Service.UserService;
+import org.lilacseeking.video.infrastructure.Exception.BusinessException;
+import org.lilacseeking.video.infrastructure.Model.DTO.LoginDTO;
+import org.lilacseeking.video.infrastructure.Model.DTO.RegisterDTO;
+import org.lilacseeking.video.infrastructure.Model.DTO.UserBasicInfoDTO;
+import org.lilacseeking.video.infrastructure.enums.ErrorCodeEumn;
+import org.lilacseeking.video.infrastructure.utils.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
@@ -28,7 +26,7 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
     private ResponseUtil responseUtil;
@@ -96,7 +94,6 @@ public class UserController {
 
     @RequestMapping(value = "/list")
     public void getUserById(@RequestBody String params , HttpServletResponse response){
-        Result result = new Result();
         Page page = null;
         try {
             page = userService.listAllUser(params);

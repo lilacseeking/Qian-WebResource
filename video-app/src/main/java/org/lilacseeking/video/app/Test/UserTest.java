@@ -2,10 +2,9 @@ package org.lilacseeking.video.app.Test;
 
 import com.alibaba.fastjson.JSON;
 import groovy.util.logging.Slf4j;
-import org.lilacseeking.video.app.Model.DTO.RegisterDTO;
-import org.lilacseeking.video.app.Utils.HttpClientUtil;
-import org.lilacseeking.video.app.Utils.RandomValueUtil;
-import org.lilacseeking.video.app.Utils.StringUtil;
+import org.lilacseeking.video.infrastructure.Model.DTO.RegisterDTO;
+import org.lilacseeking.video.infrastructure.utils.RandomValueUtil;
+import org.lilacseeking.video.infrastructure.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.text.SimpleDateFormat;
@@ -49,8 +48,9 @@ public class UserTest {
         registerDTO.setName(RandomValueUtil.getChineseName());
         logger.info("用户注册信息：{}",JSON.toJSONString(registerDTO));
         try {
-            String s = HttpClientUtil.sendHttpPost("http://localhost:8077/common/register", JSON.toJSONString(registerDTO));
-            logger.info("调用结果：{}",s);
+            // TODO 工程结构修改
+//            String s = HttpClientUtil.sendHttpPost("http://localhost:8077/common/register", JSON.toJSONString(registerDTO));
+//            logger.info("调用结果：{}",s);
         } catch (Exception e) {
             e.printStackTrace();
         }

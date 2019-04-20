@@ -2,12 +2,12 @@ package org.lilacseeking.video.app.Controller.order;
 
 import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.ApiOperation;
+import org.lilacseeking.video.core.Order.Service.OrderService;
 import org.lilacseeking.video.infrastructure.Model.DTO.CourseDTO;
-import org.lilacseeking.video.app.Model.DTO.OrderDTO;
-import org.lilacseeking.video.app.Model.DTO.UserBasicDTO;
-import org.lilacseeking.video.app.Service.order.OrderService;
-import org.lilacseeking.video.app.Utils.Page;
-import org.lilacseeking.video.app.Utils.ResponseUtil;
+import org.lilacseeking.video.app.Service.ResponseUtil;
+import org.lilacseeking.video.infrastructure.Model.DTO.OrderDTO;
+import org.lilacseeking.video.infrastructure.Model.DTO.UserBasicDTO;
+import org.lilacseeking.video.infrastructure.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

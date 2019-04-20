@@ -1,4 +1,4 @@
-//package org.lilacseeking.video.videoInfrastructure.utils;
+//package org.lilacseeking.video.infrastructure.utils;
 //
 //import com.aliyun.oss.OSSClient;
 //import com.google.common.primitives.Bytes;

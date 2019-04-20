@@ -2,8 +2,8 @@ package org.lilacseeking.video.app.Controller.file;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.lilacseeking.video.app.Service.file.FileService;
-import org.lilacseeking.video.app.Utils.ResponseUtil;
+import org.lilacseeking.video.app.Service.ResponseUtil;
+import org.lilacseeking.video.core.Upload.Service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

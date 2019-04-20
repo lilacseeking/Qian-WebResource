@@ -3,9 +3,7 @@ package org.lilacseeking.video.app.Test.ASync;
 
 import com.alibaba.fastjson.JSON;
 import org.lilacseeking.video.infrastructure.Model.DTO.ContentDTO;
-import org.lilacseeking.video.app.Model.DTO.CourseAndContentDTO;
 import org.lilacseeking.video.infrastructure.Model.DTO.CourseDTO;
-import org.lilacseeking.video.app.Model.DTO.RegisterDTO;
 import org.lilacseeking.video.app.Test.UserTest;
 
 /**

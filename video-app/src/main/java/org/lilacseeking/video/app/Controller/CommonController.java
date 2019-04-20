@@ -2,13 +2,12 @@ package org.lilacseeking.video.app.Controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.lilacseeking.video.app.Eumns.ErrorCodeEumn;
-import org.lilacseeking.video.app.Exception.BusinessException;
+import org.lilacseeking.video.infrastructure.Exception.BusinessException;
+import org.lilacseeking.video.infrastructure.enums.ErrorCodeEumn;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpServletResponse;
 
 /**
