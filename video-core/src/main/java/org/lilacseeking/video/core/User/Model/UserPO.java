@@ -3,7 +3,6 @@ package org.lilacseeking.video.core.User.Model;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.lilacseeking.video.infrastructure.Model.PO.BaseEntityPO;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;

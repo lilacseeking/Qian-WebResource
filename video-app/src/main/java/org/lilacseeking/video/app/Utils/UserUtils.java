@@ -1,5 +1,4 @@
-package org.lilacseeking.video.infrastructure.utils;
-
+package org.lilacseeking.video.app.Utils;
 
 import org.lilacseeking.video.infrastructure.Model.DTO.UserBasicInfoDTO;
 
@@ -20,7 +19,6 @@ public class UserUtils {
     // 登录过滤URL
     public static Boolean filterUrl(String url){
         switch (url){
-            default : return false;
             case "/user/loginByPwd" :
             case "/user/mobileLogin" :
             case "/user/sendMobileCode" :
@@ -28,7 +26,9 @@ public class UserUtils {
             case "/course/getAllCourse" :
             case "/content/getContentList" :
             case "/user/register" :
+            case "/test/testDubboController":
             case "/ppt/getPPTList" : return true;
+            default : return false;
         }
     }
 }

@@ -5,7 +5,7 @@ import org.lilacseeking.video.app.Service.Redis.RedisService;
 import org.lilacseeking.video.app.Service.ResponseUtil;
 import org.lilacseeking.video.infrastructure.enums.ErrorCodeEumn;
 import org.lilacseeking.video.infrastructure.Model.DTO.UserBasicInfoDTO;
-import org.lilacseeking.video.infrastructure.utils.UserUtils;
+import org.lilacseeking.video.app.Utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;

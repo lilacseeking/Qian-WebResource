@@ -10,7 +10,6 @@ import org.lilacseeking.video.infrastructure.Model.DTO.CourseDTO;
 import org.lilacseeking.video.infrastructure.enums.ErrorCodeEumn;
 import org.lilacseeking.video.infrastructure.utils.BeanCopyUtil;
 import org.lilacseeking.video.infrastructure.utils.Page;
-import org.lilacseeking.video.infrastructure.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -39,7 +38,8 @@ public class VideoCourseServiceImpl implements VideoCourseService {
      */
     public VideoCoursePO addVideoClass(VideoCoursePO videoCoursePO){
         // 当前用户信息赋值
-        videoCoursePO.setTeacher(UserUtils.getUserSession().getId());
+        // TODO 工程改造
+//        videoCoursePO.setTeacher(UserUtils.getUserSession().getId());
         return videoCourseRepository.saveOrUpdate(videoCoursePO);
     }
 
