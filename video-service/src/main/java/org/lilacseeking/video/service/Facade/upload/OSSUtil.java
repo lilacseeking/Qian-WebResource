@@ -15,6 +15,7 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 //import org.springframework.stereotype.Component;
+//
 //import javax.annotation.PostConstruct;
 //import java.io.*;
 //import java.net.URL;
@@ -23,7 +24,7 @@
 //
 //@Component
 //public class OSSUtil {
-//   private Logger logger = LoggerFactory.getLogger(OSSUtil.class);
+//    private Logger logger = LoggerFactory.getLogger(OSSUtil.class);
 //
 //    @Autowired
 //    private static OSSUtil ossUtil;
@@ -42,9 +43,10 @@
 //    private static String thumbnailRoute;
 //
 //    private static final long DEFAULT_EXPIRATION_TIME = 1000L * 60 * 60 * 24 * 365 * 100;
+//
 //    //****************************************创建客户端和一些普通常用方法****************************************
 //    @PostConstruct
-//    public void init(){
+//    public void init() {
 //
 //        // Spring 依赖注入
 //        ossUtil = this;
@@ -54,6 +56,7 @@
 //        // 初始化OSS连接客户端
 //        getOSSClient();
 //    }
+//
 //    /**
 //     * 获取oss客户端
 //     *
@@ -67,9 +70,9 @@
 //        OSSUtil.bucketName = ossUtil.constantProperties.getOss().getBucketName();
 //        OSSUtil.videoRoute = ossUtil.constantProperties.getUpload().getVideoRoute();
 //        OSSUtil.thumbnailRoute = ossUtil.constantProperties.getUpload().getThumbnailRoute();
-//        if (null == ossClient){
+//        if (null == ossClient) {
 //            return new OSSClient(endpoint, accessKeyId, accessKeySecret);
-//        }else{
+//        } else {
 //            return ossClient;
 //        }
 //
@@ -77,10 +80,11 @@
 //
 //    /**
 //     * 简单上传，返回网络URL地址
+//     *
 //     * @param inputStream
 //     * @return
 //     */
-//    public static String putObject(InputStream inputStream, String key){
+//    public static String putObject(InputStream inputStream, String key) {
 //        System.out.println("文件上传开始，key：" + key + bucketName);
 //        PutObjectResult putObjectResult = getOSSClient().putObject(bucketName, key, inputStream);
 //        // 拼接图片访问链接
@@ -91,7 +95,7 @@
 //    /**
 //     * 分片上传
 //     */
-//    public static VideoUploadProcessVO multipartUpload(VideoUploadProcessVO videoUploadProcessVO){
+//    public static VideoUploadProcessVO multipartUpload(VideoUploadProcessVO videoUploadProcessVO) {
 //        // 1. 初始化⼀个分⽚上传事件
 //        File sampleFile = new File(videoUploadProcessVO.getVideoOriginPath());
 //        InitiateMultipartUploadRequest request = new InitiateMultipartUploadRequest(bucketName, videoUploadProcessVO.getVideoName());
@@ -134,34 +138,41 @@
 //                Future<UploadPartResult> feature = ossUtil.executor.submit(new AsyncMultipartUpload(ossClient, uploadPartRequest));
 //                futures.add(feature);
 //            }
-//                // 每次上传分⽚之后，OSS的返回结果会包含⼀个PartETag。PartETag将被保存到partETags中。
-//                partETags.add(future.get().getPartETag());
+//            // 每次上传分⽚之后，OSS的返回结果会包含⼀个PartETag。PartETag将被保存到partETags中。
+//            partETags.add(future.get().getPartETag());
 //
-//            }
-//        } catch (Exception e) {
-//                throw new BusinessException(ErrorCodeEumn.VIDEO_UPLOAD_FAIL.getName());
-//        } finally {
 //        }
+//    } catch(
+//    Exception e)
 //
-//        // 排序。partETags必须按分⽚号升序排列。
-//        Collections.sort(partETags, new Comparator<PartETag>() {
-//            public int compare(PartETag p1, PartETag p2) {
-//                return p1.getPartNumber() - p2.getPartNumber();
-//            }
-//        });
+//    {
+//        throw new BusinessException(ErrorCodeEumn.VIDEO_UPLOAD_FAIL.getName());
+//    } finally
 //
-//        // 在执⾏该操作时，需要提供所有有效的partETags。OSS收到提交的partETags后，会逐⼀验证每个分⽚的有效性。当所有的数据分⽚验证通过后，OSS将把这些分⽚组合成⼀个完整的⽂件。
-//        CompleteMultipartUploadRequest completeMultipartUploadRequest =
-//                new CompleteMultipartUploadRequest(bucketName, videoUploadProcessVO.getVideoName(), uploadId, partETags);
+//    {
+//    }
+//
+//    // 排序。partETags必须按分⽚号升序排列。
+//        Collections.sort(partETags,new Comparator<PartETag>()
+//
+//    {
+//        public int compare (PartETag p1, PartETag p2){
+//        return p1.getPartNumber() - p2.getPartNumber();
+//    }
+//    });
+//
+//    // 在执⾏该操作时，需要提供所有有效的partETags。OSS收到提交的partETags后，会逐⼀验证每个分⽚的有效性。当所有的数据分⽚验证通过后，OSS将把这些分⽚组合成⼀个完整的⽂件。
+//    CompleteMultipartUploadRequest completeMultipartUploadRequest =
+//            new CompleteMultipartUploadRequest(bucketName, videoUploadProcessVO.getVideoName(), uploadId, partETags);
 //        ossClient.completeMultipartUpload(completeMultipartUploadRequest);
 //        videoUploadProcessVO.setUploadStatus(ProcessEnum.SUCCESS.name());
 //        return videoUploadProcessVO;
-//    }
+//}
 //
 //    /**
 //     * 创建文件下载url
 //     *
-//     * @param key        所存内容的键名
+//     * @param key 所存内容的键名
 //     * @return
 //     */
 //    public static URL createFileAccessUrl(String key) {
@@ -169,9 +180,6 @@
 //        req.setExpiration(new Date(new Date().getTime() + DEFAULT_EXPIRATION_TIME));
 //        return ossClient.generatePresignedUrl(req);
 //    }
-//
-//
-//
 //
 //
 //    /**
@@ -195,6 +203,7 @@
 //        ObjectListing objectListing = ossClient.listObjects(listObjectsRequest);
 //        return objectListing.getObjectSummaries();
 //    }
+//
 //    /**
 //     * 删除objects
 //     *
@@ -679,23 +688,24 @@
 //    public static void downloadByLimits(OSSClient ossClient, GetObjectRequest request, String localFile) {
 //        ossClient.getObject(request, new File(localFile));
 //    }
-//    //****************************************图片工具类****************************************
+////****************************************图片工具类****************************************
 //
-//    /**
-//     * 访问图片时process的类型
-//     */
-//    public enum ProcessType {
-//        IMAGE("image"), STYLE("style");
-//        private String processType;
+///**
+// * 访问图片时process的类型
+// */
+//public enum ProcessType {
+//    IMAGE("image"), STYLE("style");
+//    private String processType;
 //
-//        ProcessType(String processType) {
-//            this.processType = processType;
-//        }
-//
-//        public String getProcessType() {
-//            return processType;
-//        }
+//    ProcessType(String processType) {
+//        this.processType = processType;
 //    }
+//
+//    public String getProcessType() {
+//        return processType;
+//    }
+//
+//}
 //
 //    /**
 //     * 创建访问图片的url(匿名访问，所访问的图片要有访问权限)
@@ -815,6 +825,7 @@
 //
 //    /**
 //     * 获取文件扩展名
+//     *
 //     * @param filename
 //     * @return
 //     */

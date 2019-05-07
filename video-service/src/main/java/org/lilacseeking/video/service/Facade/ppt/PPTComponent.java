@@ -1,7 +1,5 @@
 package org.lilacseeking.video.service.Facade.ppt;
 
-import org.lilacseeking.video.core.PPT.Service.PPTService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,8 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class PPTComponent {
 
-    @Autowired
-    private PPTService pptService;
 
 
 }

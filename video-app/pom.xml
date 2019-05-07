@@ -30,6 +30,12 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.lilacseeking.video</groupId>
+            <artifactId>video-api</artifactId>
+            <version>${video-app-version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>org.lilacseeking.project</groupId>
             <artifactId>video-service</artifactId>
             <version>${video-app-version}</version>
@@ -167,7 +173,38 @@
         <!--<version>2.0.19</version>-->
         <!--</dependency>-->
         <!--引入session-->
+        <!-- Dubbo Spring Boot Starter -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>2.7.1</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
+        <!--使用redis做注册中心-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <!--Maven编译插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5</version>
+            </plugin>
+            <!--Maven编译插件-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
