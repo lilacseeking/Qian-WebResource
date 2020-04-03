@@ -56,26 +56,4 @@ public class PutObjectProgressListener implements ProgressListener {
     public boolean isSucceed() {
         return succeed;
     }
-
-    public static void main(String[] args) {
-         String endpoint = "oss-cn-beijing.aliyuncs.com";
-         String accessKeyId = "LTAI1VcTye0NFaFM";
-         String accessKeySecret = "ArmHD4PsXUfoZovIJNwQDtelMcwanS";
-         String bucketName = "lilacseeking";
-//        InputStream inputStream = new FileInputStream("<yourlocalFile>");
-        String objectName = "tim.exe";
-//         String objectName = "C:\\Users\\lilacseeking\\Desktop\\tim_pc.exe";
-         OSSClient ossClient = OSSUtil.createOSSClient(endpoint, accessKeyId, accessKeySecret);
-
-        try {
-            // 带进度条的上传。
-            ossClient.putObject(new PutObjectRequest(bucketName, objectName, new File("C:\\Users\\lilacseeking\\Desktop\\tim_pc.exe")).
-                    <PutObjectRequest>withProgressListener(new PutObjectProgressListener()));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        // 关闭OSSClient。
-        ossClient.shutdown();
-    }
 }
